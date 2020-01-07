@@ -1,6 +1,7 @@
 package main
 
 import (
+	"cmonney/go-web-api/handlers"
 	"fmt"
 	"net/http"
 	"os"
@@ -8,21 +9,13 @@ import (
 
 func main() {
 
-	http.HandleFunc("/", routeHandler)
+	http.HandleFunc("/users/", handlers.UsersRouter)
+	http.HandleFunc("/users", handlers.UsersRouter)
+	http.HandleFunc("/", handlers.RouteHandler)
 	err := http.ListenAndServe("localhost:11111", nil)
 
 	if err != nil {
 		fmt.Println(err)
 		os.Exit(1)
 	}
-}
-
-func routeHandler(writer http.ResponseWriter, request *http.Request) {
-	if request.URL.Path != "/" {
-		writer.WriteHeader(http.StatusNotFound)
-		writer.Write([]byte("Asset not found\n"))
-		return
-	}
-	writer.WriteHeader(http.StatusOK)
-	writer.Write([]byte("Running API V1\n"))
 }

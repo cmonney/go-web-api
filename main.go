@@ -1,8 +1,8 @@
 package main
 
 import (
-	"cmonney/go-web-api/handlers"
 	"fmt"
+	"github.com/cmonney/go-web-api/handlers"
 	"net/http"
 	"os"
 )
